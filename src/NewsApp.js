@@ -96,7 +96,7 @@ export default function NewsApp() {
           )}
         </h3>
         <h3 className="message">{error && "No Result Found"}</h3>
-        {/* <h3 className="message">{refreshMessage && "New Posts"}</h3> */}
+        {/*  <h3 className="message">{refreshMessage && <button onclick={fetchData()}>New Posts</button>}</h3> */}
       </div>
     </div>
   );
