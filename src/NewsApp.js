@@ -1,9 +1,10 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import useNewsSearch from "./useNewsSearch";
 import { FaRegNewspaper, FaSearch } from "react-icons/fa";
 import NewsData from "./NewsData";
 import "./NewsApp.css";
 import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 export default function NewsApp() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -11,10 +12,8 @@ export default function NewsApp() {
   const [pageNumber, setPageNumber] = useState(1);
   const [isDisabled, setDisabled] = useState(true);
   const [searchValue, setSearchValue] = useState(searchParams.get("q") || "");
-  const { news, hasMore, loading, error, fetchData } = useNewsSearch(
-    query,
-    pageNumber
-  );
+  const { news, hasMore, loading, error, fetchData, refreshMessage } =
+    useNewsSearch(query, pageNumber);
 
   const observer = useRef();
   const lastNewsElementRef = useCallback(
@@ -86,7 +85,17 @@ export default function NewsApp() {
             }
           })}
         </div>
+        <h3 className="message">
+          {loading && (
+            <div class="balls">
+              <h1 class="ball"></h1>
+              <h1 class="ball"></h1>
+              <h1 class="ball"></h1>
+            </div>
+          )}
+        </h3>
         <h3 className="message">{error && "No Result Found"}</h3>
+        {/* <h3 className="message">{refreshMessage && "New Posts"}</h3> */}
       </div>
     </div>
   );
