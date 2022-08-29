@@ -66,6 +66,7 @@ export default function NewsApp() {
             type="text"
             value={query}
             onChange={handleSearch}
+            spellCheck={false}
           />
           <button id="submit" onClick={handleSubmit} disabled={isDisabled}>
             <FaSearch className="searchIcon" color="#353b48" />
